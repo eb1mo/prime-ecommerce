@@ -2,13 +2,21 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
+const productRoutes = require("./routes/productRoutes");
+const upload = require("./config/multerConfig");
 
 const app = express();
 app.use(cors());
 
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
 
 app.use("/auth", authRoutes);
+app.use("/product", [upload.array("images")], productRoutes);
 
 app.listen(8000, async () => {
   try {
