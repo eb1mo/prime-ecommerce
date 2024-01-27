@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 
-function Create() {
+function Login() {
   const onSubmit = (values) => {
     console.log(values);
 
@@ -107,4 +107,4 @@ function Create() {
   );
 }
 
-export default Create;
+export default Login;
