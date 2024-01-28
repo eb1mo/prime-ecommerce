@@ -1,14 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import GenericInput from "../../../components/GenericInput";
 import { Form, Formik } from "formik";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function CreateProduct() {
+  const [files, setFiles] = useState();
+
+  const initialValues = {
+    name: "",
+    description: "",
+    brand: "",
+    price: null
+  };
+
+  const onSubmit = (values) => {
+    if (!files) {
+      toast.error("Please select a files");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("brand", values.brand);
+    formData.append("price", values.price);
+    formData.append("images", files);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/product`, formData)
+      .then((res) => {
+        toast.success(res.data?.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data?.message);
+      });
+  };
+
+  const onChange = (event) => {
+    if (event.target.files) {
+      setFiles(event.target.files);
+    }
+  };
   return (
     <>
       <div className="flex flex-col items-start py-12 min-h-lvh sm:px-6 lg:px-8">
         <div className="mt-8 sm:w-full sm:max-w-sm">
           <div className="space-y-6">
-            <Formik>
+            <Formik onSubmit={onSubmit} initialValues={initialValues}>
               <Form className="space-y-4">
                 <GenericInput
                   label="Product Name"
@@ -40,6 +77,7 @@ function CreateProduct() {
                   type="file"
                   placeholder="Select Product Images"
                   multiple="multiple"
+                  onChange={onChange}
                 />
                 <div className="mt-4">
                   <button
