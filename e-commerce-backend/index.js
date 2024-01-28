@@ -18,7 +18,7 @@ app.use(
 );
 
 app.use("/auth", authRoutes);
-app.use("/product", [upload.array("images")], productRoutes);
+app.use("/product", [upload.any("images")], productRoutes);
 
 app.listen(8000, async () => {
   try {
