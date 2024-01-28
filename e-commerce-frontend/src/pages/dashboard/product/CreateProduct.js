@@ -24,9 +24,16 @@ function CreateProduct() {
     formData.append("description", values.description);
     formData.append("brand", values.brand);
     formData.append("price", values.price);
-    formData.append("images", files);
+    [...files].forEach((file, index) => {
+      formData.append(`images[${index}]`, file);
+    });
+
     axios
-      .post(`${process.env.REACT_APP_API_URL}/product`, formData)
+      .post(`${process.env.REACT_APP_API_URL}/product`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
       .then((res) => {
         toast.success(res.data?.message);
       })
