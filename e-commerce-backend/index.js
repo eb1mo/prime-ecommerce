@@ -4,10 +4,12 @@ const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
 const productRoutes = require("./routes/productRoutes");
 const upload = require("./config/multerConfig");
+const morgan = require("morgan");
 
 const app = express();
-app.use(cors());
+app.use(morgan("dev"));
 
+app.use(cors());
 app.use(express.json());
 app.use(
   express.urlencoded({
