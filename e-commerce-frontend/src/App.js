@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Create from "./pages/auth/Create";
 import Login from "./pages/auth/Login";
 import { Toaster } from "react-hot-toast";
+import CreateProduct from "./pages/dashboard/product/CreateProduct";
 
 function App() {
   const router = createBrowserRouter([
@@ -16,6 +17,15 @@ function App() {
         {
           path: "login",
           element: <Login />
+        }
+      ]
+    },
+    {
+      path: "/dashboard",
+      children: [
+        {
+          path: "addProduct",
+          element: <CreateProduct />
         }
       ]
     }
