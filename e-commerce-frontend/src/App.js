@@ -4,6 +4,7 @@ import Create from "./pages/auth/Create";
 import Login from "./pages/auth/Login";
 import { Toaster } from "react-hot-toast";
 import CreateProduct from "./pages/dashboard/product/CreateProduct";
+import ListProduct from "./pages/dashboard/product/ListProduct";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ function App() {
         {
           path: "addProduct",
           element: <CreateProduct />
+        },
+        {
+          path: "listProduct",
+          element: <ListProduct />
         }
       ]
     }
