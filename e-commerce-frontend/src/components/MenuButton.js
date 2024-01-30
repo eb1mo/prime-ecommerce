@@ -33,8 +33,8 @@ export default function MenuButton(props) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95">
           <Menu.Items className="absolute w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg right-4 ring-1 ring-black/5 focus:outline-none">
-            {links.map((link) => (
-              <Menu.Item>
+            {links.map((link, index) => (
+              <Menu.Item key={`menu-item-${index}`}>
                 <button
                   className={`flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   onClick={link?.onClick}>
