@@ -7,9 +7,19 @@ import CreateProduct from "./pages/dashboard/product/CreateProduct";
 import ListProduct from "./pages/dashboard/product/ListProduct";
 import DashboardLayout from "./layout/DashboardLayout";
 import UpdateProduct from "./pages/dashboard/product/UpdateProduct";
+import Home from "./pages/index";
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "/",
+      children: [
+        {
+          path: "/",
+          element: <Home />
+        }
+      ]
+    },
     {
       path: "/auth",
       children: [
