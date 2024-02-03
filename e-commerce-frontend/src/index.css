@@ -40,3 +40,23 @@ input{
 .pg-next{
   @apply relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50
 }
+
+.loader {
+  width: 36px;
+  height: 36px;
+  border: 5px solid #b0b0b08b;
+  border-bottom-color: #004cff;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
