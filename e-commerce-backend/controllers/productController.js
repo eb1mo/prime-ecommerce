@@ -49,7 +49,7 @@ const updateProduct = async (req, res) => {
   try {
     const id = req.params.id;
     const { name, price, description, brand } = req.body;
-    const images = req.files.map((image) => image.filename);
+    const images = req.files?.map((image) => image.filename);
 
     const product = await Product.findById(id);
     if (!product) {
@@ -58,7 +58,7 @@ const updateProduct = async (req, res) => {
       });
     }
 
-    if (images.length > 0) {
+    if (images?.length > 0) {
       await Product.findByIdAndUpdate(id, {
         name,
         price,
@@ -74,10 +74,8 @@ const updateProduct = async (req, res) => {
       message: "Product Updated Successfully"
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({
-      message: "Product Failed to update",
-      error: error.errors
+      message: "Product Failed to update"
     });
   }
 };

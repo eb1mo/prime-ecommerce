@@ -3,6 +3,7 @@ import MenuButton from "../../../components/MenuButton";
 import axios from "axios";
 import useFetch from "../../../hooks/useFetch";
 import Loading from "../../../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function ListProduct() {
   const {
@@ -10,6 +11,7 @@ export default function ListProduct() {
     loading,
     error
   } = useFetch(`${process.env.REACT_APP_API_URL}/product`);
+  const navigate = useNavigate();
 
   if (loading) {
     return <Loading />;
@@ -36,18 +38,20 @@ export default function ListProduct() {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {products?.data?.map((person) => (
-            <tr key={person._id}>
-              <td>{person.name}</td>
-              <td>{person.price}</td>
-              <td>{person.description}</td>
-              <td>{person.brand}</td>
-              <td>{person.createdAt}</td>
+          {products?.data?.map((product) => (
+            <tr key={product._id}>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{product.description}</td>
+              <td>{product.brand}</td>
+              <td>{product.createdAt}</td>
               <td>
                 <MenuButton
                   links={[
                     {
-                      onClick: () => {},
+                      onClick: () => {
+                        navigate(`/dashboard/updateProduct/${product._id}`);
+                      },
                       label: "Update"
                     },
                     { onClick: () => {}, label: "Delete" }

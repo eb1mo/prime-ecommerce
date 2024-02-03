@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import CreateProduct from "./pages/dashboard/product/CreateProduct";
 import ListProduct from "./pages/dashboard/product/ListProduct";
 import DashboardLayout from "./layout/DashboardLayout";
+import UpdateProduct from "./pages/dashboard/product/UpdateProduct";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +34,10 @@ function App() {
         {
           path: "listProduct",
           element: <ListProduct />
+        },
+        {
+          path: "updateProduct/:id",
+          element: <UpdateProduct />
         }
       ]
     }
