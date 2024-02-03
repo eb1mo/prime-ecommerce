@@ -1,49 +1,18 @@
 import React from "react";
 import ProductList from "../components/ProductList";
-
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    price: "$35",
-    description: "This is a Description",
-    brand: "Supreme"
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    price: "$35",
-    description: "This is a Description",
-    brand: "Supreme"
-  },
-  {
-    id: 3,
-    name: "Basic Tee",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    price: "$35",
-    description: "This is a Description",
-    brand: "Supreme"
-  },
-  {
-    id: 4,
-    name: "Basic Tee",
-    image:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    price: "$35",
-    description: "This is a Description",
-    brand: "Supreme"
-  }
-];
+import useFetch from "../hooks/useFetch";
+import Loading from "../components/Loading";
 
 function Index() {
+  const { data: products, loading: isLoading } = useFetch(
+    `${process.env.REACT_APP_API_URL}/product`
+  );
+
+  if (isLoading) return <Loading />;
+
   return (
     <div>
-      <ProductList products={products} />
+      <ProductList products={products?.data || []} />
     </div>
   );
 }

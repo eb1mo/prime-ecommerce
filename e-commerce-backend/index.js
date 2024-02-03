@@ -16,6 +16,7 @@ app.use(
     extended: true
   })
 );
+app.use(express.static("uploads"));
 
 app.use("/auth", authRoutes);
 app.use("/product", [upload.any("images")], productRoutes);
