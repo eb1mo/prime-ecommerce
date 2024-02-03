@@ -48,7 +48,10 @@ export default function ListProduct() {
               <td>
                 <MenuButton
                   links={[
-                    { onClick: () => {}, label: "Update" },
+                    {
+                      onClick: () => {},
+                      label: "Update"
+                    },
                     { onClick: () => {}, label: "Delete" }
                   ]}
                 />
