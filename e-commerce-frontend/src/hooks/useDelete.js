@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 
-const usePost = (url, { onSuccess, onError }) => {
+const useDelete = (url, { onSuccess, onError }) => {
   const [loading, setLoading] = useState(false);
 
-  const mutate = async (data) => {
+  const mutate = async (id, data) => {
     setLoading(true);
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.delete(url + `/${id}`, data);
       onSuccess(response.data);
     } catch (error) {
       onError(error);
@@ -22,4 +22,4 @@ const usePost = (url, { onSuccess, onError }) => {
   };
 };
 
-export default usePost;
+export default useDelete;

@@ -7,7 +7,8 @@ import CreateProduct from "./pages/dashboard/product/CreateProduct";
 import ListProduct from "./pages/dashboard/product/ListProduct";
 import DashboardLayout from "./layout/DashboardLayout";
 import UpdateProduct from "./pages/dashboard/product/UpdateProduct";
-import Home from "./pages/index";
+import Index from "./pages/index";
+import SingleProduct from "./pages/product/SingleProduct";
 
 function App() {
   const router = createBrowserRouter([
@@ -16,7 +17,11 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home />
+          element: <Index />
+        },
+        {
+          path: "/product/:id",
+          element: <SingleProduct />
         }
       ]
     },

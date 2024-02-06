@@ -4,16 +4,33 @@ import axios from "axios";
 import useFetch from "../../../hooks/useFetch";
 import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router-dom";
+import useDelete from "../../../hooks/useDelete";
+import toast from "react-hot-toast";
 
 export default function ListProduct() {
   const {
     data: products,
     loading,
-    error
+    error,
+    refetch
   } = useFetch(`${process.env.REACT_APP_API_URL}/product`);
+
+  const { loading: isDeleting, mutate } = useDelete(
+    `${process.env.REACT_APP_API_URL}/product`,
+    {
+      onSuccess: (res) => {
+        refetch();
+        toast.success(res?.message);
+      },
+      onError: (error) => {
+        toast.error(error?.response?.data?.message);
+      }
+    }
+  );
+
   const navigate = useNavigate();
 
-  if (loading) {
+  if (loading || isDeleting) {
     return <Loading />;
   }
 
@@ -54,7 +71,12 @@ export default function ListProduct() {
                       },
                       label: "Update"
                     },
-                    { onClick: () => {}, label: "Delete" }
+                    {
+                      onClick: () => {
+                        mutate(product._id);
+                      },
+                      label: "Delete"
+                    }
                   ]}
                 />
               </td>

@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema({
 });
 
 productSchema.post("find", function (docs, next) {
-  const API_URL = process.env.API_URL || "http://localhost:8000";
+  const API_URL = process.env.API_URL;
   docs.forEach((doc) => {
     doc._doc = {
       ...doc._doc,
