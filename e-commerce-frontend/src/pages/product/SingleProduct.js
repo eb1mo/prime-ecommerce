@@ -6,12 +6,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import usePost from "../../hooks/usePost";
 
-const images = [
-  "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-  "https://tailwindui.com/img/ecommerce-images/product-page-03-product-02.jpg",
-  "https://tailwindui.com/img/ecommerce-images/product-page-03-product-03.jpg"
-];
-
 export default function SingleProduct() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
@@ -88,7 +82,13 @@ export default function SingleProduct() {
                   setQuantity(event.target.value);
                 }}
               />
-              <div className="flex mt-10 sm:flex-col1">
+              <div className="flex mt-10 space-x-2 sm:flex-col-1">
+                <button
+                  onClick={onSubmit}
+                  type="button"
+                  className="flex items-center justify-center flex-1 max-w-xs px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
+                  Add to Cart
+                </button>
                 <button
                   onClick={onSubmit}
                   type="button"
