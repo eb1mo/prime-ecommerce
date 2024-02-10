@@ -34,7 +34,7 @@ function CreateProduct() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/product`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data"
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       })
       .then((res) => {

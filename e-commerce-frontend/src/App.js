@@ -9,6 +9,7 @@ import DashboardLayout from "./layout/DashboardLayout";
 import UpdateProduct from "./pages/dashboard/product/UpdateProduct";
 import Index from "./pages/index";
 import SingleProduct from "./pages/product/SingleProduct";
+import ListOrder from "./pages/dashboard/order/ListOrder";
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +54,10 @@ function App() {
         {
           path: "updateProduct/:id",
           element: <UpdateProduct />
+        },
+        {
+          path: "listOrder",
+          element: <ListOrder />
         }
       ]
     }

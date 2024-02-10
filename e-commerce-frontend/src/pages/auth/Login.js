@@ -2,16 +2,18 @@ import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const onSubmit = (values) => {
-    console.log(values);
+  const navigate = useNavigate();
 
+  const onSubmit = (values) => {
     axios
-      .post("http://localhost:8000/auth/login", values)
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, values)
       .then((res) => {
         toast.success(res.data.message);
         localStorage.setItem("token", res.data.access_token);
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.response.data.message);

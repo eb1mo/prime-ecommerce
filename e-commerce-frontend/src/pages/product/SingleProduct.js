@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import ImageGallery from "../../components/ImageGallery";
 import useFetch from "../../hooks/useFetch";
 import Loading from "../../components/Loading";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import usePost from "../../hooks/usePost";
 
 const images = [
   "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
@@ -11,10 +14,32 @@ const images = [
 
 export default function SingleProduct() {
   const { id } = useParams();
+  const [quantity, setQuantity] = useState(1);
 
   const { data, loading, error, refetch } = useFetch(
     `${process.env.REACT_APP_API_URL}/product/${id}`
   );
+
+  const { loading: isOrderLoading, mutate } = usePost(
+    `${process.env.REACT_APP_API_URL}/order`,
+    {
+      onSuccess: () => {},
+      onError: () => {}
+    }
+  );
+
+  const onSubmit = () => {
+    const qty = parseInt(quantity);
+    if (qty < 1) {
+      toast.error("Minimum quantity should be 1");
+      return;
+    }
+    const submitData = {
+      productId: id,
+      quantity: qty
+    };
+    mutate(submitData);
+  };
 
   const { data: product } = data || {};
   const images =
@@ -56,11 +81,19 @@ export default function SingleProduct() {
             </div>
 
             <div className="mt-6">
+              <input
+                type="number"
+                defaultValue={1}
+                onChange={(event) => {
+                  setQuantity(event.target.value);
+                }}
+              />
               <div className="flex mt-10 sm:flex-col1">
                 <button
-                  type="submit"
+                  onClick={onSubmit}
+                  type="button"
                   className="flex items-center justify-center flex-1 max-w-xs px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
-                  Add to cart
+                  Checkout
                 </button>
               </div>
             </div>
