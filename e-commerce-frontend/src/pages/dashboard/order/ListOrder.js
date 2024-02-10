@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 export default function ListOrder() {
   const {
-    data: products,
+    data: orders,
     loading,
     error,
     refetch
@@ -56,16 +56,16 @@ export default function ListOrder() {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {products?.data?.map((product) => (
-            <tr key={product._id}>
-              <td>{product.userId.email}</td>
-              <td>{product.productId.name}</td>
-              <td>{product.productId.price}</td>
-              <td>{product.quantity}</td>
+          {orders?.data?.map((order) => (
+            <tr key={order._id}>
+              <td>{order.userId.email}</td>
+              <td>{order.productId.name}</td>
+              <td>{order.productId.price}</td>
+              <td>{order.quantity}</td>
               <td>
-                {parseInt(product.productId.price) * parseInt(product.quantity)}
+                {parseInt(order.productId.price) * parseInt(order.quantity)}
               </td>
-              <td>{product.createdAt}</td>
+              <td>{order.createdAt}</td>
               {/* <td>
                 <MenuButton
                   links={[
