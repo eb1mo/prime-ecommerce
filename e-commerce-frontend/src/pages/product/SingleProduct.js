@@ -21,6 +21,15 @@ export default function SingleProduct() {
       onError: () => {}
     }
   );
+  const { loading: isCartLoading, mutate: addToCart } = usePost(
+    `${process.env.REACT_APP_API_URL}/cart`,
+    {
+      onSuccess: (res) => {
+        toast.success(res.message);
+      },
+      onError: () => {}
+    }
+  );
 
   const onSubmit = () => {
     const qty = parseInt(quantity);
@@ -33,6 +42,19 @@ export default function SingleProduct() {
       quantity: qty
     };
     mutate(submitData);
+  };
+
+  const onCartClick = () => {
+    const qty = parseInt(quantity);
+    if (qty < 1) {
+      toast.error("Minimum quantity should be 1");
+      return;
+    }
+    const submitData = {
+      productId: id,
+      quantity: qty
+    };
+    addToCart(submitData);
   };
 
   const { data: product } = data || {};
@@ -84,7 +106,8 @@ export default function SingleProduct() {
               />
               <div className="flex mt-10 space-x-2 sm:flex-col-1">
                 <button
-                  onClick={onSubmit}
+                  onClick={onCartClick}
+                  disabled={isCartLoading}
                   type="button"
                   className="flex items-center justify-center flex-1 max-w-xs px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
                   Add to Cart
@@ -92,6 +115,7 @@ export default function SingleProduct() {
                 <button
                   onClick={onSubmit}
                   type="button"
+                  disabled={isOrderLoading}
                   className="flex items-center justify-center flex-1 max-w-xs px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
                   Checkout
                 </button>

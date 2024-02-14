@@ -10,6 +10,7 @@ import UpdateProduct from "./pages/dashboard/product/UpdateProduct";
 import Index from "./pages/index";
 import SingleProduct from "./pages/product/SingleProduct";
 import ListOrder from "./pages/dashboard/order/ListOrder";
+import Cart from "./pages/cart";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
         {
           path: "/product/:id",
           element: <SingleProduct />
+        },
+        {
+          path: "/cart",
+          element: <Cart />
         }
       ]
     },
