@@ -11,11 +11,13 @@ import Index from "./pages/index";
 import SingleProduct from "./pages/product/SingleProduct";
 import ListOrder from "./pages/dashboard/order/ListOrder";
 import Cart from "./pages/cart";
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <MainLayout />,
       children: [
         {
           path: "/",

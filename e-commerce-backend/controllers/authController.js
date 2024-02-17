@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
         id: user.id,
         email: user.email
       },
-      "secret-key"
+      process.env.SECRET_KEY
     );
     return res.json({
       message: "Login Successful",

@@ -17,8 +17,12 @@ export default function SingleProduct() {
   const { loading: isOrderLoading, mutate } = usePost(
     `${process.env.REACT_APP_API_URL}/order`,
     {
-      onSuccess: () => {},
-      onError: () => {}
+      onSuccess: (res) => {
+        toast.success(res?.message);
+      },
+      onError: (error) => {
+        toast.error(error?.response?.data?.message);
+      }
     }
   );
   const { loading: isCartLoading, mutate: addToCart } = usePost(
