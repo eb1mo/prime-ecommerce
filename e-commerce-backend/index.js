@@ -7,6 +7,7 @@ const upload = require("./config/multerConfig");
 const { expressjwt: jwt } = require("express-jwt");
 const orderRoutes = require("./routes/orderRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 
 require("dotenv").config();
 
@@ -55,6 +56,8 @@ app.use(
   ],
   cartRoutes
 );
+
+app.use("/chat", chatRoutes);
 
 app.use(function (err, req, res, next) {
   if (err.name === "UnauthorizedError") {
