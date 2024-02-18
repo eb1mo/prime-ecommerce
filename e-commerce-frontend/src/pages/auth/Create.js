@@ -14,7 +14,7 @@ function Create() {
       body: JSON.stringify(values)
     };
 
-    fetch("http://localhost:8000/auth/create", requestOptions)
+    fetch(`${process.env.REACT_APP_API_URL}/auth/create`, requestOptions)
       .then((res) => {
         if (!res.ok) throw new Error();
         alert("Successfully Created Account");

@@ -1,8 +1,12 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartProvider";
 
 function CartItems(props) {
+  const cartContext = useContext(CartContext);
+
   const navigate = useNavigate();
   const onLogout = () => {
     localStorage.removeItem("token");
@@ -12,7 +16,7 @@ function CartItems(props) {
   return (
     <>
       <span className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent ">
-        Cart Items : {props?.length}
+        Cart Items : {cartContext?.total}
       </span>
       <button
         onClick={onLogout}

@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Loading from "../../components/Loading";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartProvider";
 
 function Cart() {
-  const { data: carts, loading } = useFetch(
-    `${process.env.REACT_APP_API_URL}/cart`
-  );
+  // const { data: carts, loading } = useFetch(
+  //   `${process.env.REACT_APP_API_URL}/cart`
+  // );
+  const { carts } = useContext(CartContext);
 
   const getTotalPrice = () => {
     let total = 0;
@@ -15,9 +18,9 @@ function Cart() {
     return total;
   };
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <>

@@ -2,13 +2,15 @@ import { useParams } from "react-router-dom";
 import ImageGallery from "../../components/ImageGallery";
 import useFetch from "../../hooks/useFetch";
 import Loading from "../../components/Loading";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import usePost from "../../hooks/usePost";
+import { CartContext } from "../../context/CartProvider";
 
 export default function SingleProduct() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const cartContext = useContext(CartContext);
 
   const { data, loading, error, refetch } = useFetch(
     `${process.env.REACT_APP_API_URL}/product/${id}`
@@ -29,6 +31,7 @@ export default function SingleProduct() {
     `${process.env.REACT_APP_API_URL}/cart`,
     {
       onSuccess: (res) => {
+        cartContext?.refetch();
         toast.success(res.message);
       },
       onError: () => {}

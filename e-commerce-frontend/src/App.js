@@ -12,6 +12,7 @@ import SingleProduct from "./pages/product/SingleProduct";
 import ListOrder from "./pages/dashboard/order/ListOrder";
 import Cart from "./pages/cart";
 import MainLayout from "./layout/MainLayout";
+import CartProvider from "./context/CartProvider";
 
 function App() {
   const router = createBrowserRouter([
@@ -71,8 +72,10 @@ function App() {
   ]);
   return (
     <>
-      <RouterProvider router={router} />
-      <Toaster position="top-right" />
+      <CartProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" />
+      </CartProvider>
     </>
   );
 }
