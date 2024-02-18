@@ -1,11 +1,25 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Link, useNavigate } from "react-router-dom";
 
 function CartItems(props) {
+  const navigate = useNavigate();
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/auth/login");
+  };
+
   return (
-    <span className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent ">
-      Cart Items : {props?.length}
-    </span>
+    <>
+      <span className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent ">
+        Cart Items : {props?.length}
+      </span>
+      <button
+        onClick={onLogout}
+        className="px-4 py-2 ml-2 text-sm text-white bg-indigo-600 rounded-md">
+        Logout
+      </button>
+    </>
   );
 }
 
@@ -30,16 +44,16 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="hidden sm:col-span-2 sm:ml-6 sm:flex sm:space-x-8">
-                  <a
-                    href="#"
+                  <Link
+                    to="/"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
                     Home
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to="/cart"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-                    About Us
-                  </a>
+                    Cart
+                  </Link>
                 </div>
                 <div className="items-center justify-end hidden sm:col-span-5 sm:flex">
                   <CartItems length={0} />
